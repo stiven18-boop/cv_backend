@@ -4,16 +4,15 @@ from googleapiclient.http import MediaIoBaseDownload
 import os
 import io
 
-SERVICE_ACCOUNT_FILE = "utp-bot-egresados-b4982b2200ec.json"
+credentials_info = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 FOLDERS= {"Estandar":"18-ZSVYnNa8yT9ayy5V7kyXc4VexqEA3b",
              "Mixta": "1SKEqWU49k2k6WSuavrLQtyTwxXqpUAoX"}
 
 def descargar_archivos():  # Función reutilizable
 
-    credentials = service_account.Credentials.from_service_account_file(
-        SERVICE_ACCOUNT_FILE,
-        scopes=SCOPES
+    credentials = service_account.Credentials.from_service_account_info(
+        credentials_info
     )
 
     service = build('drive', 'v3', credentials=credentials)
