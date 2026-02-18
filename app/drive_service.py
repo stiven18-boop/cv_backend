@@ -3,13 +3,18 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 import os
 import io
+import json
 
-credentials_info = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
-FOLDERS= {"Estandar":"18-ZSVYnNa8yT9ayy5V7kyXc4VexqEA3b",
-             "Mixta": "1SKEqWU49k2k6WSuavrLQtyTwxXqpUAoX"}
 
-def descargar_archivos():  # Función reutilizable
+FOLDERS = {
+    "Estandar": "18-ZSVYnNa8yT9ayy5V7kyXc4VexqEA3b",
+    "Mixta": "1SKEqWU49k2k6WSuavrLQtyTwxXqpUAoX"
+}
+
+def descargar_archivos():
+
+    credentials_info = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
 
     credentials = service_account.Credentials.from_service_account_info(
         credentials_info,
@@ -33,7 +38,6 @@ def descargar_archivos():  # Función reutilizable
         for archivo in archivos:
 
             request = service.files().get_media(fileId=archivo["id"])
-
             ruta_archivo = os.path.join(carpeta_local, archivo["name"])
 
             with open(ruta_archivo, "wb") as f:
