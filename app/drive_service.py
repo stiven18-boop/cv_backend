@@ -12,7 +12,8 @@ FOLDERS= {"Estandar":"18-ZSVYnNa8yT9ayy5V7kyXc4VexqEA3b",
 def descargar_archivos():  # Función reutilizable
 
     credentials = service_account.Credentials.from_service_account_info(
-        credentials_info
+        credentials_info,
+        scopes=SCOPES
     )
 
     service = build('drive', 'v3', credentials=credentials)
