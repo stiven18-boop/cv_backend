@@ -1,18 +1,31 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, Boolean
 from app.database import Base
 
 
 class Candidato(Base):
     __tablename__ = "candidatos"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id                      = Column(Integer, primary_key=True, index=True)
+    nombre                  = Column(String)
+    nombre_archivo          = Column(String)
+    hash_archivo            = Column(String, unique=True)
 
-    nombre = Column(String(150), nullable=False)
-    email = Column(String(150), unique=True, index=True, nullable=True)
-    telefono = Column(String(50), nullable=True)
+    texto_completo          = Column(Text)
 
-    habilidades = Column(Text, nullable=True)
-    experiencia = Column(Text, nullable=True)
+    perfil                  = Column(Text)
+    experiencia             = Column(Text)
+    educacion               = Column(Text)
+    habilidades             = Column(Text)
+    formacion_complementaria = Column(Text)   # ← NUEVO
 
-    def __repr__(self):
-        return f"<Candidato(nombre={self.nombre}, email={self.email})>"
+    embedding               = Column(Text)
+
+
+class Usuario(Base):
+    __tablename__ = "usuarios"
+
+    id       = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, nullable=False)
+    password = Column(String, nullable=False)
+    activo   = Column(Boolean, default=True)
+    creado   = Column(String, default="")

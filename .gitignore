@@ -1,1 +1,19 @@
-utp-bot-egresados-b4982b2200ec.json
+
+# Credenciales Google — NUNCA subir
+*.json
+utp-bot-egresados*.json
+
+# Base de datos
+*.db
+*.sqlite
+
+# CVs descargados (pueden ser datos personales)
+descargas/
+cvs/
+
+# Python
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/

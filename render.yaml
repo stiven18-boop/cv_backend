@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: bolsa-empleo-api
+    runtime: python
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: GOOGLE_CREDENTIALS_JSON
+        sync: false
+    plan: starter
+
+  - type: web
+    name: bolsa-empleo-frontend
+    runtime: python
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: streamlit run dashboard/app.py --server.port 10000 --server.address 0.0.0.0
+    envVars:
+      - key: API_URL
+        sync: false
