@@ -17,3 +17,5 @@ requests
 docx2pdf
 wordsegmen
 psycopg2-binary
+pytesseract
+pdf2image
