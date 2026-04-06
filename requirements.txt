@@ -15,7 +15,7 @@ numpy
 bcrypt
 requests
 docx2pdf
-wordsegmen
+wordsegmenT
 psycopg2-binary
 pytesseract
 pdf2image
