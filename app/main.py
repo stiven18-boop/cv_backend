@@ -30,7 +30,13 @@ from sentence_transformers import SentenceTransformer
 
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+_model = None
+
+def get_model():
+    global _model
+    if _model is None:
+        _model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
+    return _model
 
 UMBRAL_MINIMO = 0.10
 

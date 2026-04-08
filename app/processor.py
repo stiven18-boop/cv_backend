@@ -19,7 +19,13 @@ logging.getLogger("pdfminer").setLevel(logging.ERROR)
 pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Jalza\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 POPPLER_PATH = r"C:\Users\Jalza\AppData\Local\Programs\poppler-25.12.0\Library\bin"
 
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+_model = None
+
+def get_model():
+    global _model
+    if _model is None:
+        _model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
+    return _model
 
 CATEGORIAS_CV = {
     "perfil": "resumen profesional del candidato, objetivo laboral, descripción personal sobre sí mismo",
