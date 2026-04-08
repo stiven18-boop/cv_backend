@@ -25,3 +25,52 @@ else:
     creds = service_account.Credentials.from_service_account_file(
         _FILE, scopes=SCOPES
     )
+
+def descargar_archivos():
+
+    service = build("drive", "v3", credentials=creds)
+
+    for nombre_carpeta, folder_id in FOLDERS.items():
+
+        print(f"\nProcesando carpeta: {nombre_carpeta}")
+
+        carpeta_local = os.path.join("descargas", nombre_carpeta)
+        os.makedirs(carpeta_local, exist_ok=True)
+
+        page_token = None
+
+        while True:
+
+            resultados = service.files().list(
+                q=f"'{folder_id}' in parents and trashed=false",
+                fields="nextPageToken, files(id, name)",
+                pageToken=page_token
+            ).execute()
+
+            archivos = resultados.get("files", [])
+
+            print(f"Archivos encontrados en esta página: {len(archivos)}")
+
+            for archivo in archivos:
+
+                ruta_archivo = os.path.join(carpeta_local, archivo["name"])
+
+                # Evitar descargar si ya existe
+                if os.path.exists(ruta_archivo):
+                    continue
+
+                request = service.files().get_media(fileId=archivo["id"])
+
+                with open(ruta_archivo, "wb") as f:
+                    downloader = MediaIoBaseDownload(f, request)
+
+                    done = False
+                    while not done:
+                        status, done = downloader.next_chunk()
+
+                print(f"[DESCARGADO] {archivo['name']}")
+
+            page_token = resultados.get("nextPageToken")
+
+            if not page_token:
+                break

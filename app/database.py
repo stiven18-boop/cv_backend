@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 # Usa la variable de entorno en Render, SQLite en local
 DATABASE_URL = os.environ.get(
     "DATABASE_URL",
-    "sqlite:///./bolsa.db"
+    "sqlite:///./cv_database.db"
 )
 
 # Render entrega URLs con "postgres://", SQLAlchemy necesita "postgresql://"
