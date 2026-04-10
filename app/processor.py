@@ -130,12 +130,12 @@ def limpiar_texto(texto):
 def get_embeddings_categorias():
     global _embeddings_categorias
     if _embeddings_categorias is None:
+        model = get_model()
         _embeddings_categorias = {
-            cat: embedding_model.encode(desc)
+            cat: model.encode(desc)
             for cat, desc in CATEGORIAS_CV.items()
         }
     return _embeddings_categorias
-
 
 def clasificar_bloque(texto: str) -> str:
     if len(texto.strip()) < 20:

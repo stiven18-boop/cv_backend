@@ -407,12 +407,13 @@ def buscar(
                 }
                 for c in candidatos
             ]
+        # Al inicio de la función donde se usan, agrega:
+        model = get_model()
 
-        # ── Embeddings de la query (solo 1-3 llamadas, fuera del loop) ──
-        q_titulo      = embedding_model.encode(f"Cargo o título profesional: {titulo}").tolist()    if titulo      else None
-        q_experiencia = embedding_model.encode(f"Experiencia laboral en: {experiencia}").tolist()   if experiencia else None
-        q_habilidad   = embedding_model.encode(f"Habilidades y competencias: {habilidad}").tolist() if habilidad   else None
-
+        # Luego reemplaza embedding_model.encode por model.encode
+        q_titulo = model.encode(f"Cargo o título profesional: {titulo}").tolist() if titulo else None
+        q_experiencia = model.encode(f"Experiencia laboral en: {experiencia}").tolist() if experiencia else None
+        q_habilidad = model.encode(f"Habilidades y competencias: {habilidad}").tolist() if habilidad else None
         # ── Keywords normalizadas para filtro léxico ──
         kw_titulo      = keywords_de(titulo)
         kw_experiencia = keywords_de(experiencia)
