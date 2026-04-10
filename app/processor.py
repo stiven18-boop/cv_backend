@@ -1773,7 +1773,8 @@ Contexto adicional: {texto[:2000]}
         db.close()
         return {"insertados": 0, "omitidos": omitidos, "total_en_db": total}
 
-    embeddings = embedding_model.encode(
+    model = get_model()
+    embeddings = model.encode(
         textos_embeddings,
         batch_size=32,
         show_progress_bar=True
