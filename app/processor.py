@@ -140,7 +140,8 @@ def get_embeddings_categorias():
 def clasificar_bloque(texto: str) -> str:
     if len(texto.strip()) < 20:
         return "desconocido"
-    emb_bloque = embedding_model.encode(texto[:500])
+    model = get_model()
+    emb_bloque = model.encode(texto[:500])
     emb_cats = get_embeddings_categorias()
     scores = {
         cat: cosine_similarity([emb_bloque], [emb_cat])[0][0]
