@@ -493,7 +493,7 @@ button[kind="header"] svg {
         {"<img class='logo-spe' src='" + logo_spe_src + "'>" if logo_spe_src else ""}
         <div class="tb-brand">
           <b>Dashboard de Candidatos</b>
-          <small>Gestión de Bolsa de Empleo</small>
+          <small>Gestión de Egresados</small>
         </div>
       </div>
       <div class="tb-right">
@@ -593,16 +593,15 @@ button[kind="header"] svg {
     """, unsafe_allow_html=True)
 
     with st.sidebar:
-        # Logo
-        st.markdown("""
-        <div style="text-align:center; padding: .8rem 0 1rem; border-bottom:1px solid rgba(255,255,255,0.15); margin-bottom:1rem;">
-            <img src="https://media2.utp.edu.co/oficinas/60/Bolsa-de-empleo-azul.png"
-                 style="height:42px; filter:brightness(0) invert(1); margin-bottom:6px;">
-            <div style="font-size:.6rem; font-weight:800; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,0.55);">
-                Gestión de Bolsa de Empleo
-            </div>
+        if logo_aseutp_src:
+            st.markdown(f"""
+    <div style="text-align:center; padding: .8rem 0 1rem; border-bottom:1px solid rgba(255,255,255,0.15); margin-bottom:1rem;">
+        <img class="logo-spe" src="{logo_aseutp_src}" style="height:60px; margin-bottom:6px;">
+        <div style="font-size:.6rem; font-weight:800; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,0.55);">
+            Gestión de Egresados
         </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
         st.markdown(
             '<p style="font-size:.6rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin:0 0 .6rem;">Navegación</p>',

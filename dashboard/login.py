@@ -255,7 +255,7 @@ def mostrar_login():
         st.markdown("""
         <div class="login-card-top">
           <p class="login-title">Iniciar Sesión</p>
-          <p class="login-subtitle">Gestión de Bolsa de Empleo — Acceso restringido</p>
+          <p class="login-subtitle">Gestión de Egresados — Acceso restringido</p>
         </div>
         """, unsafe_allow_html=True)
 
